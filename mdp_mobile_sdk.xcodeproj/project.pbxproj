@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		22FAB08B1848957200BD99E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAB08A1848957200BD99E4 /* Foundation.framework */; };
-		22FAB0901848957200BD99E4 /* mdp_mobile_sdk.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22FAB08F1848957200BD99E4 /* mdp_mobile_sdk.h */; };
-		22FAB0921848957200BD99E4 /* mdp_mobile_sdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAB0911848957200BD99E4 /* mdp_mobile_sdk.m */; };
+		22FAB0901848957200BD99E4 /* MDPMobile.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22FAB08F1848957200BD99E4 /* MDPMobile.h */; };
+		22FAB0921848957200BD99E4 /* MDPMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAB0911848957200BD99E4 /* MDPMobile.m */; };
 		22FAB0991848957200BD99E4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAB0981848957200BD99E4 /* XCTest.framework */; };
 		22FAB09A1848957200BD99E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAB08A1848957200BD99E4 /* Foundation.framework */; };
 		22FAB09C1848957200BD99E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAB09B1848957200BD99E4 /* UIKit.framework */; };
 		22FAB09F1848957200BD99E4 /* libmdp_mobile_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FAB0871848957200BD99E4 /* libmdp_mobile_sdk.a */; };
 		22FAB0A51848957200BD99E4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FAB0A31848957200BD99E4 /* InfoPlist.strings */; };
-		22FAB0A71848957200BD99E4 /* mdp_mobile_sdkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAB0A61848957200BD99E4 /* mdp_mobile_sdkTests.m */; };
+		22FAB0A71848957200BD99E4 /* MDPMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FAB0A61848957200BD99E4 /* MDPMobileTests.m */; };
+		22FEC3231848D75B001929E7 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FEC3211848D609001929E7 /* libOCMock.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				22FAB0901848957200BD99E4 /* mdp_mobile_sdk.h in CopyFiles */,
+				22FAB0901848957200BD99E4 /* MDPMobile.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,14 +46,17 @@
 		22FAB0871848957200BD99E4 /* libmdp_mobile_sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmdp_mobile_sdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FAB08A1848957200BD99E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22FAB08E1848957200BD99E4 /* mdp_mobile_sdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mdp_mobile_sdk-Prefix.pch"; sourceTree = "<group>"; };
-		22FAB08F1848957200BD99E4 /* mdp_mobile_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mdp_mobile_sdk.h; sourceTree = "<group>"; };
-		22FAB0911848957200BD99E4 /* mdp_mobile_sdk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mdp_mobile_sdk.m; sourceTree = "<group>"; };
+		22FAB08F1848957200BD99E4 /* MDPMobile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDPMobile.h; sourceTree = "<group>"; };
+		22FAB0911848957200BD99E4 /* MDPMobile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDPMobile.m; sourceTree = "<group>"; };
 		22FAB0971848957200BD99E4 /* mdp_mobile_sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mdp_mobile_sdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FAB0981848957200BD99E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		22FAB09B1848957200BD99E4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		22FAB0A21848957200BD99E4 /* mdp_mobile_sdkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mdp_mobile_sdkTests-Info.plist"; sourceTree = "<group>"; };
 		22FAB0A41848957200BD99E4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		22FAB0A61848957200BD99E4 /* mdp_mobile_sdkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mdp_mobile_sdkTests.m; sourceTree = "<group>"; };
+		22FAB0A61848957200BD99E4 /* MDPMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDPMobileTests.m; sourceTree = "<group>"; };
+		22FEC31F1848D4DD001929E7 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "../../../mdp-test-appTests/lib/libOCMock.a"; sourceTree = "<group>"; };
+		22FEC3211848D609001929E7 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = mdp_mobile_sdkTests/lib/libOCMock.a; sourceTree = "<group>"; };
+		C854D7D718E9973200DBE955 /* mdp_mobile_sdk.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = mdp_mobile_sdk.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22FAB0991848957200BD99E4 /* XCTest.framework in Frameworks */,
+				22FEC3231848D75B001929E7 /* libOCMock.a in Frameworks */,
 				22FAB09C1848957200BD99E4 /* UIKit.framework in Frameworks */,
 				22FAB09F1848957200BD99E4 /* libmdp_mobile_sdk.a in Frameworks */,
 				22FAB09A1848957200BD99E4 /* Foundation.framework in Frameworks */,
@@ -100,6 +105,8 @@
 		22FAB0891848957200BD99E4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22FEC3211848D609001929E7 /* libOCMock.a */,
+				22FEC31F1848D4DD001929E7 /* libOCMock.a */,
 				22FAB08A1848957200BD99E4 /* Foundation.framework */,
 				22FAB0981848957200BD99E4 /* XCTest.framework */,
 				22FAB09B1848957200BD99E4 /* UIKit.framework */,
@@ -110,8 +117,8 @@
 		22FAB08C1848957200BD99E4 /* mdp_mobile_sdk */ = {
 			isa = PBXGroup;
 			children = (
-				22FAB08F1848957200BD99E4 /* mdp_mobile_sdk.h */,
-				22FAB0911848957200BD99E4 /* mdp_mobile_sdk.m */,
+				22FAB08F1848957200BD99E4 /* MDPMobile.h */,
+				22FAB0911848957200BD99E4 /* MDPMobile.m */,
 				22FAB08D1848957200BD99E4 /* Supporting Files */,
 			);
 			path = mdp_mobile_sdk;
@@ -128,7 +135,7 @@
 		22FAB0A01848957200BD99E4 /* mdp_mobile_sdkTests */ = {
 			isa = PBXGroup;
 			children = (
-				22FAB0A61848957200BD99E4 /* mdp_mobile_sdkTests.m */,
+				22FAB0A61848957200BD99E4 /* MDPMobileTests.m */,
 				22FAB0A11848957200BD99E4 /* Supporting Files */,
 			);
 			path = mdp_mobile_sdkTests;
@@ -137,6 +144,7 @@
 		22FAB0A11848957200BD99E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C854D7D718E9973200DBE955 /* mdp_mobile_sdk.podspec */,
 				22FAB0A21848957200BD99E4 /* mdp_mobile_sdkTests-Info.plist */,
 				22FAB0A31848957200BD99E4 /* InfoPlist.strings */,
 			);
@@ -189,6 +197,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Vasco;
+				TargetAttributes = {
+					22FAB0961848957200BD99E4 = {
+						TestTargetID = 22FAB0861848957200BD99E4;
+					};
+				};
 			};
 			buildConfigurationList = 22FAB0821848957200BD99E4 /* Build configuration list for PBXProject "mdp_mobile_sdk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -224,7 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FAB0921848957200BD99E4 /* mdp_mobile_sdk.m in Sources */,
+				22FAB0921848957200BD99E4 /* MDPMobile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FAB0A71848957200BD99E4 /* mdp_mobile_sdkTests.m in Sources */,
+				22FAB0A71848957200BD99E4 /* MDPMobileTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +380,24 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib\"/**",
+				);
 				INFOPLIST_FILE = "mdp_mobile_sdkTests/mdp_mobile_sdkTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -384,7 +414,24 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "mdp_mobile_sdk/mdp_mobile_sdk-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib\"/**",
+				);
 				INFOPLIST_FILE = "mdp_mobile_sdkTests/mdp_mobile_sdkTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"\"$(SRCROOT)/mdp_mobile_sdkTests/lib/libOCMock.a\"",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -409,6 +456,7 @@
 				22FAB0AC1848957200BD99E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22FAB0AD1848957200BD99E4 /* Build configuration list for PBXNativeTarget "mdp_mobile_sdkTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +465,7 @@
 				22FAB0AF1848957200BD99E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

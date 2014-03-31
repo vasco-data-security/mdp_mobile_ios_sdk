@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+
+xcuserdata
+.xccheckout
+
+builds/*
+
+.gitmodules
+secret_stash
