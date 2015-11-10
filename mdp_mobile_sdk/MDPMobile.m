@@ -8,6 +8,7 @@
 
 #import "MDPMobile.h"
 #import <UIKit/UIKit.h>
+#import "NSDictionary+UrlEncoding.h"
 
 #define MDPHOST @"https://www.mydigipass.com/oauth/authenticate.html"
 
@@ -66,6 +67,52 @@
 
     mydigipassUrlString = [mydigipassUrlString stringByAppendingString:@"state="];
     mydigipassUrlString = [mydigipassUrlString stringByAppendingString:[self encodeString:state]];
+
+    if ([self isMdpInstalled]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mydigipassUrlString]];
+    } else {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                                 delegate:self
+                                                        cancelButtonTitle:LocalizedString(@"CANCEL", @"cancel")
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:LocalizedString(@"INSTALL_APP", @"Install MYDIGIPASS"), LocalizedString(@"LOGIN_WITH_BROWSER", @"Login via browser"), nil];
+        [actionSheet showInView:[[[UIApplication sharedApplication] delegate] window]];
+    }
+}
+
+
+- (void)authenticateWithState:(NSString *)state scope:(NSString*)scope andParameters:(NSDictionary *)parameters
+{
+
+    if (state == nil || [state isEqualToString:@""]) {
+        NSException *exception = [NSException exceptionWithName:NSInvalidArgumentException
+                                                         reason:@"The usage of the state parameter is mandatory for CSRF prevention."
+                                                       userInfo:nil];
+        [exception raise];
+    }
+
+    NSMutableDictionary *oauthParameters;
+    if(parameters) {
+        oauthParameters = [[NSDictionary dictionaryWithDictionary:parameters] mutableCopy];
+    } else {
+        oauthParameters = [@{} mutableCopy];
+    }
+
+    oauthParameters[@"client_id"] = _clientId;
+    oauthParameters[@"state"] = state;
+
+    if(scope) {
+        oauthParameters[@"scope"] = scope;
+    }
+
+    if ([self isMdpInstalled]) { // Authenticate with MDP-app
+        oauthParameters[@"x-success"] = _redirectUri;
+        mydigipassUrlString = [NSDictionary addQueryStringToUrlString:@"mydigipass-oauth://x-callback-url/2.0/authenticate" withDictionary:oauthParameters];
+    } else { // Authenticate through browser
+        oauthParameters[@"redirect_uri"] = _redirectUri;
+        oauthParameters[@"response_type"] = @"code";
+        mydigipassUrlString = [NSDictionary addQueryStringToUrlString:_oauthEndpoint withDictionary:oauthParameters];
+    }
 
     if ([self isMdpInstalled]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mydigipassUrlString]];

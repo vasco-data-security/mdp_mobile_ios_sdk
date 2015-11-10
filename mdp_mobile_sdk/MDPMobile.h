@@ -21,7 +21,9 @@
 
 + (void)setSharedSessionHost:(NSString *)host;
 
-- (void)authenticateWithState:(NSString *) state;
+- (void)authenticateWithState:(NSString *) state __deprecated_msg("Please use authenticateWithState:scope:andParameters: instead.");
+
+- (void)authenticateWithState:(NSString *)state scope:(NSString*)scope andParameters:(NSDictionary *)parameters;
 
 - (BOOL)canHandleURL:(NSURL *)url;
 

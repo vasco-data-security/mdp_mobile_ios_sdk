@@ -15,7 +15,7 @@
 
 @end
 
-static OCMockObject *mockUIApplication = nil;
+static id mockUIApplication;
 
 @implementation UIApplication (UIApplicationTestAdditions)
 +(id)sharedApplication {
@@ -28,7 +28,7 @@ static OCMockObject *mockUIApplication = nil;
 - (void)setUp
 {
     [super setUp];
-    mockUIApplication = [OCMockObject mockForClass:[UIApplication class]];
+    mockUIApplication = OCMClassMock([UIApplication class]); //[OCMockObject mockForClass:[UIApplication class]];
     [[[mockUIApplication stub] andReturnValue:@YES] canOpenURL:[OCMArg any]];
 }
 
@@ -64,30 +64,77 @@ static OCMockObject *mockUIApplication = nil;
     [MDPMobile setSharedSessionRedirectUri:@"redirect://me.please" clientId:@"abcdef"];
     MDPMobile *session = [MDPMobile sharedSession];
 
-    NSString *expectedUrl = @"mydigipass-oauth://x-callback-url/2.0/authenticate?x-success=redirect%3A%2F%2Fme.please&client_id=abcdef&state=someState";
-    [[[mockUIApplication stub] andReturnValue:@YES] canOpenURL:[OCMArg any]];
+    NSURL *expectedUrl = [NSURL URLWithString:@"mydigipass-oauth://x-callback-url/2.0/authenticate?x-success=redirect%3A%2F%2Fme.please&client_id=abcdef&state=someState"];
 
-    [[mockUIApplication expect] openURL:[OCMArg checkWithBlock:^BOOL(NSURL *url){
-        XCTAssertEqualObjects([url absoluteString], expectedUrl);
-    }]];
+    OCMStub([mockUIApplication canOpenURL:[OCMArg any]]).andReturn(YES);
+
+    OCMExpect([mockUIApplication openURL:expectedUrl]);
 
     [session authenticateWithState:@"someState"];
+
+    OCMVerifyAll(mockUIApplication);
 }
 
-- (void)testAuthenticateWithStateWithAppNotInstalled
+// This test is commented because we don't automatically open the URL in the browser but ask the user what to do instead.
+// This also means it's not a quick-fix of a failing test but needs a rethink how to do this properly.
+//- (void)testAuthenticateWithStateWithAppNotInstalled
+//{
+//    [MDPMobile setSharedSessionRedirectUri:@"redirect://me.please" clientId:@"abcdef"];
+//    MDPMobile *session = [MDPMobile sharedSession];
+//
+//    NSURL *expectedUrl = [NSURL URLWithString:@"http://localhost:3000/oauth/authenticate.html?response_type=code&redirect_uri=redirect%3A%2F%2Fme.please&client_id=abcdef&state=someState"];
+//
+//    OCMStub([mockUIApplication canOpenURL:[OCMArg any]]).andReturn(NO);
+//
+//    OCMExpect([mockUIApplication openURL:expectedUrl]);
+//
+//    [session authenticateWithState:@"someState"];
+//
+//    OCMVerifyAll(mockUIApplication);
+//}
+
+
+- (void)testAuthenticateWithStateScopeAndParametersWithAppInstalled
 {
     [MDPMobile setSharedSessionRedirectUri:@"redirect://me.please" clientId:@"abcdef"];
     MDPMobile *session = [MDPMobile sharedSession];
 
-    NSString *expectedUrl = @"http://localhost:3000/oauth/authenticate.html?response_type=code&redirect_uri=redirect%3A%2F%2Fme.please&client_id=abcdef&state=someState";
-    mockUIApplication = [OCMockObject mockForClass:[UIApplication class]];
-    [[[mockUIApplication stub] andReturnValue:@NO] canOpenURL:[OCMArg any]];
+    NSURL *expectedUrl = [NSURL URLWithString:@"mydigipass-oauth://x-callback-url/2.0/authenticate?client_id=abcdef&OPAQUE=TRUE&state=someState&scope=eid_profile&x-success=redirect%3A%2F%2Fme.please&WHY=SO%20SERIOUS%3F"];
+    OCMStub([mockUIApplication canOpenURL:[OCMArg any]]).andReturn(YES);
 
-    [[mockUIApplication expect] openURL:[OCMArg checkWithBlock:^BOOL(NSURL *url){
-        XCTAssertEqualObjects([url absoluteString], expectedUrl);
-    }]];
+    OCMExpect([mockUIApplication openURL:expectedUrl]);
 
-    [session authenticateWithState:@"someState"];
+    NSDictionary *opaqueParams = @{ @"OPAQUE" : @"TRUE", @"WHY" : @"SO SERIOUS?" };
+    [session authenticateWithState:@"someState" scope: @"eid_profile" andParameters:opaqueParams];
+
+    OCMVerifyAll(mockUIApplication);
 }
+
+- (void)testAuthenticateWithStateScopeButWithoutAnyOtherParametersWithAppInstalled
+{
+    [MDPMobile setSharedSessionRedirectUri:@"redirect://me.please" clientId:@"abcdef"];
+    MDPMobile *session = [MDPMobile sharedSession];
+
+    NSURL *expectedUrl = [NSURL URLWithString:@"mydigipass-oauth://x-callback-url/2.0/authenticate?client_id=abcdef&scope=eid_profile&state=someState&x-success=redirect%3A%2F%2Fme.please"];
+
+    OCMStub([mockUIApplication canOpenURL:[OCMArg any]]).andReturn(YES);
+
+    OCMExpect([mockUIApplication openURL:expectedUrl]);
+
+    [session authenticateWithState:@"someState" scope: @"eid_profile" andParameters:nil];
+
+    OCMVerifyAll(mockUIApplication);
+}
+
+- (void)testAuthenticateWithStateScopeAndParametersGoesKaputWhenNoStateGiven
+{
+
+    [MDPMobile setSharedSessionRedirectUri:@"redirect://me.please" clientId:@"abcdef"];
+    MDPMobile *session = [MDPMobile sharedSession];
+
+    XCTAssertThrows([session authenticateWithState:@"" scope: @"eid_profile" andParameters:nil], @"The usage of the state parameter is mandatory for CSRF prevention.");
+    XCTAssertThrows([session authenticateWithState:nil scope: @"eid_profile" andParameters:nil], @"The usage of the state parameter is mandatory for CSRF prevention.");
+}
+
 
 @end
