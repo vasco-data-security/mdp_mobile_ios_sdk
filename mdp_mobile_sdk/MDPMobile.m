@@ -117,12 +117,7 @@
     if ([self isMdpInstalled]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mydigipassUrlString]];
     } else {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                                 delegate:self
-                                                        cancelButtonTitle:LocalizedString(@"CANCEL", @"cancel")
-                                                   destructiveButtonTitle:nil
-                                                        otherButtonTitles:LocalizedString(@"INSTALL_APP", @"Install MYDIGIPASS"), LocalizedString(@"LOGIN_WITH_BROWSER", @"Login via browser"), nil];
-        [actionSheet showInView:[[[UIApplication sharedApplication] delegate] window]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/app/mydigipass.com-authenticator/id514349476"]];
     }
 }
 
